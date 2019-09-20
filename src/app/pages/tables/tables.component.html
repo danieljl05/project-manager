@@ -1,8 +1,8 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+<div class="header bg-gradient-danger pb-5 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xl-3 col-lg-6">
           <div class="card card-stats mb-4 mb-xl-0">
             <div class="card-body">
@@ -87,20 +87,53 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
-  <div class="row">
-    <div class="col">
+  <div class="row justify-content-md-center">
+    <div class="col-10">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Card tables</h3>
+          <h3 class="mb-0">Crear Proyecto</h3>
         </div>
-        <div class="table-responsive">
+        <div class="card-body">
+          <!-- Form groups used in grid -->
+          <form role="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-12">
+                <div class="alert alert-success" *ngIf="msg">
+                  {{msg}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label class="form-control-label">Nombre</label>
+                  <input type="text" class="form-control" name="name" placeholder="Nombre del proyecto"
+                    [(ngModel)]="form.name">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label">Fecha de inicio</label>
+                  <input type="date" class="form-control" name="startdate" [(ngModel)]="form.startdate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-primary my-4">Iniciar sesión</button>
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
@@ -430,12 +463,12 @@
               </li>
             </ul>
           </nav>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
   <!-- Dark table -->
-  <div class="row mt-5">
+  <!-- <div class="row mt-5">
     <div class="col">
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
@@ -749,5 +782,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
