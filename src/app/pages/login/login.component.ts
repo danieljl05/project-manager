@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   handleResponse(data) {
-    this.router.navigateByUrl('/tables');
+    this.router.navigateByUrl('/dashboard');
   }
 
 }

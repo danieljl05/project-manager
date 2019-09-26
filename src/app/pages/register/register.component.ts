@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
   }
 
   handleResponse(data) {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/register');
   }
-
 }

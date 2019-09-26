@@ -1,0 +1,78 @@
+<div class="header bg-gradient-danger pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="card mb-4">
+    <!-- Card header -->
+    <div class="card-header">
+      <h3 class="mb-0">Formulario</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+      <!-- Form groups used in grid -->
+      <form (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" for="name">Nombre</label>
+              <input type="text" class="form-control" id="name" placeholder="Nombre usuario" name="name"
+                [(ngModel)]="user.name" type="text" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" for="surname">Apellido</label>
+              <input type="text" class="form-control" id="surname" placeholder="Apellido" name="surname"
+                [(ngModel)]="user.surname" type="text" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" for="password">Contraseña</label>
+              <input type="password" class="form-control" id="password" placeholder="Contraseña" name="password"
+                [(ngModel)]="user.password" type="password" required (click)="user.password = ''">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="form-control-label" for="idrol">Rol</label>
+              <select name="idrol" id="idrol" class="form-control" [(ngModel)]="user.idrol">
+                <option *ngFor="let rol of rolList" value="{{rol.idrole}}">{{rol.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="form-control-label" for="idnumber">Número identificación</label>
+              <input type="text" class="form-control" id="idnumber" placeholder="Número identificación" name="idnumber"
+                [(ngModel)]="user.idnumber" type="text" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-control-label" for="email">Correo electrónico</label>
+              <input type="text" class="form-control" id="email" placeholder="Correo electrónico" name="email"
+                [(ngModel)]="user.email" type="text" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="form-control-label" for="charge">Cargo</label>
+              <input type="text" class="form-control" id="charge" placeholder="Cargo" name="charge"
+                [(ngModel)]="user.charge" type="text" required>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-right">
+              <a class="btn btn-danger mt-4" [routerLink]="['/users']">Cancelar</a>
+              <button type="button" type="submit" class="btn btn-primary mt-4">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
