@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-tables',
@@ -9,14 +11,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TablesComponent implements OnInit {
 
-  public form;
   public msg;
+  public form;
   public date;
+  public idproject = '';
 
   constructor(
-    private http: HttpClient
+    private router: Router,
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private projectService: ProjectService
   ) {
-    this.msg = '';
     const DateObj = new Date;
     let date = DateObj.getFullYear() + '-' + ('0' + (DateObj.getMonth() + 1)).slice(-2) + '-' + ('0' + DateObj.getDate()).slice(-2);
     this.date = date;
@@ -25,31 +30,37 @@ export class TablesComponent implements OnInit {
       startdate: date,
       image: 'image'
     };
+
+    this.route.params.subscribe(params => {
+      this.idproject = (params['id'] ? params['id'] : '');
+    });
   }
 
   ngOnInit() {
+    if (this.idproject != '') {
+      this.projectService.getProject(this.idproject).subscribe(data => {
+        this.form = data['project'];
+      });
+    }
   }
 
   onSubmit() {
-    this.http.post('http://localhost:8000/api/project', this.form).subscribe(
+    let route = '';
+    if (this.form.idproject) {
+      route = "/" + this.form.idproject;
+    }
+    this.http.post('http://localhost:8000/api/project' + route, this.form).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     );
+
   }
 
   handleError(error) {
     console.log(error);
-
   }
 
   handleResponse(data) {
-    let date = this.date;
-    this.form = {
-      name: '',
-      startdate: date,
-      image: 'image'
-    };
-    this.msg = 'Proyecto creado correctamente';
+    this.router.navigateByUrl('/projects');
   }
-
 }

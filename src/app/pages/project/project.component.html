@@ -1,0 +1,42 @@
+<div class="header bg-gradient-danger pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row justify-content-md-center">
+    <div class="col-12">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row">
+            <h3 class="" style="margin-bottom: 5px;">Listado proyectos</h3> &nbsp;&nbsp;
+            <a class="btn btn-info btn-sm" [routerLink]="['/project']"> Agregar</a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha inicio</th>
+                <th scope="col">Editar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let project of projectsList">
+                <tr>
+                  <td> {{ project.name }} </td>
+                  <td> {{ project.startdate | date: 'mediumDate' }} </td>
+                  <td> <a class="btn btn-primary btn-sm ni ni-settings" title="Editar"
+                      [routerLink]="['/projects', 'edit', project.idproject]"> </a> </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

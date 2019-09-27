@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { ProjectService } from './services/project.service';
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
