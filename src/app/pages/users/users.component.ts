@@ -13,6 +13,17 @@ export class UsersComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
+    this.getUsers();
+  }
+
+  delete(idUser) {
+    this.projectService.deleteUser(idUser).subscribe(data => {
+      alert('Usuario eliminado correctamente');
+      this.getUsers();
+    });
+  }
+
+  getUsers() {
     this.projectService.getUsers().subscribe((data) => {
       this.usersList = data['users'];
     });

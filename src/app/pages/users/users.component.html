@@ -20,7 +20,7 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">Número de identificación</th>
                 <th scope="col">Email</th>
-                <th scope="col">Editar</th>
+                <th scope="col">Opciones</th>
               </tr>
             </thead>
             <tbody>
@@ -31,7 +31,10 @@
                   <td> {{ user.idnumber }} </td>
                   <td> {{ user.email }} </td>
                   <td> <a class="btn btn-primary btn-sm ni ni-settings" title="Editar"
-                      [routerLink]="['/users', 'edit', user.iduser]"> </a> </td>
+                      [routerLink]="['/users', 'edit', user.iduser]"> </a>
+                    <button class="btn btn-danger btn-sm ni ni-basket" title="Eliminar"
+                      (click)="delete(user.iduser)"></button>
+                  </td>
                 </tr>
               </ng-container>
             </tbody>

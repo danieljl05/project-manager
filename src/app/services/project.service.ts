@@ -30,4 +30,12 @@ export class ProjectService {
   getRoles() {
     return this.http.get(this.url + 'roles');
   }
+
+  deleteUser(userId) {
+    return this.http.get(this.url + 'user-delete/' + userId);
+  }
+
+  deleteProject(projectId) {
+    return this.http.get(this.url + 'project-delete/' + projectId);
+  }
 }

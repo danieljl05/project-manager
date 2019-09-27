@@ -16,6 +16,17 @@ export class ProjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getProjects();
+  }
+
+  delete(idProject) {
+    this.projectService.deleteProject(idProject).subscribe(data => {
+      alert('Proyecto eliminado correctamente');
+      this.getProjects();
+    });
+  }
+
+  getProjects() {
     this.projectService.getProjects().subscribe(data => {
       this.projectsList = data['projects'];
     });
