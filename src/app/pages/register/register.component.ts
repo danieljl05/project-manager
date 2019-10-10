@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private token: TokenService
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class RegisterComponent implements OnInit {
   }
 
   handleResponse(data) {
-    this.router.navigateByUrl('/register');
+    this.token.handle(data);
+    this.router.navigateByUrl('/dashboard');
   }
 }

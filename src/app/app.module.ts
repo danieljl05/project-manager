@@ -14,6 +14,19 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { ProjectService } from './services/project.service';
 
+import { registerLocaleData } from '@angular/common';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGuard } from './auth.guard';
+
+import localeEs from '@angular/common/locales/es';
+import localeEsExtra from '@angular/common/locales/extra/es';
+import { LoginGuard } from './login.guard';
+registerLocaleData(localeEs, 'es-CO', localeEsExtra);
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -22,14 +35,21 @@ import { ProjectService } from './services/project.service';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost:8000"],
+        blacklistedRoutes: []
+      }
+    })
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
   ],
-  providers: [ProjectService],
+  providers: [ProjectService, AuthGuard, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
