@@ -28,6 +28,8 @@ export class TablesComponent implements OnInit {
     this.form = {
       name: '',
       startdate: date,
+      enddate: '',
+      description: '',
       image: 'image'
     };
 
@@ -53,7 +55,6 @@ export class TablesComponent implements OnInit {
       data => this.handleResponse(data),
       error => this.handleError(error)
     );
-
   }
 
   handleError(error) {

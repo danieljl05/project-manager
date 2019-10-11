@@ -45,7 +45,7 @@ export class TokenService {
 
   remove() {
     localStorage.removeItem('token');
-    localStorage.removeItem('payload');
+    localStorage.removeItem('payload');    
   }
 
   decode(payload) {
