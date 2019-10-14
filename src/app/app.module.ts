@@ -21,6 +21,9 @@ import { AuthGuard } from './auth.guard';
 import localeEs from '@angular/common/locales/es';
 import localeEsExtra from '@angular/common/locales/extra/es';
 import { LoginGuard } from './login.guard';
+import { ActivitiesListComponent } from './pages/activities-list/activities-list.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material/card';
 registerLocaleData(localeEs, 'es-CO', localeEsExtra);
 
 export function tokenGetter() {
@@ -42,12 +45,15 @@ export function tokenGetter() {
         whitelistedDomains: ["localhost:8000"],
         blacklistedRoutes: []
       }
-    })
+    }),
+    DragDropModule,
+    MatCardModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    ActivitiesListComponent,    
   ],
   providers: [ProjectService, AuthGuard, LoginGuard],
   bootstrap: [AppComponent]
