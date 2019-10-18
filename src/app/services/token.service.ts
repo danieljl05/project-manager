@@ -9,12 +9,18 @@ export class TokenService {
   constructor() { }
 
   handle(data) {
+    this.saveInfo(data['user']);
     this.set(data['access_token']);
   }
 
   set(token) {
     localStorage.setItem('token', token);
     this.payload(token);
+  }
+
+  saveInfo(info) {
+    info = JSON.stringify(info);
+    localStorage.setItem('user-info', info);
   }
 
   get() {
@@ -46,6 +52,7 @@ export class TokenService {
   remove() {
     localStorage.removeItem('token');
     localStorage.removeItem('payload');    
+    localStorage.removeItem('user-info');
   }
 
   decode(payload) {

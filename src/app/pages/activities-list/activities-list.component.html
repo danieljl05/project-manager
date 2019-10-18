@@ -1,15 +1,37 @@
-<div class="example-container">
-  <h2>To do</h2>
-  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-    class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-  </div>
-</div>
+<mat-toolbar class="example-toolbar">
+  <button class="btn btn-secondary" mat-icon-button (click)="snav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1 class="example-app-name">Proyecto</h1>
+</mat-toolbar>
+<!-- <mat-drawer-container class="example-container">
+  <mat-drawer mode="side" position="end" opened>Drawer content</mat-drawer>
+  <mat-drawer-content>Main content</mat-drawer-content>
+</mat-drawer-container> -->
 
-<div class="example-container">
-  <h2>Done</h2>
-  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-    class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+
+<div class="row mx-5 mt-5">
+  <div class="example-container">
+    <h2>Pendientes</h2>
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Terminadas</h2>
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList, checkedList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Aprobadas</h2>
+    <div cdkDropList #checkedList="cdkDropList" [cdkDropListData]="checked" [cdkDropListConnectedTo]="[doneList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of checked" cdkDrag>{{item}}</div>
+    </div>
   </div>
 </div>

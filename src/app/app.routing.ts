@@ -32,7 +32,7 @@ const routes: Routes = [
       }
     ]
   }, 
-  { path: 'activities', component: ActivitiesListComponent, canActivate: [AuthGuard] },
+  { path: 'projects/:id/dashboard', component: ActivitiesListComponent, canActivate: [AuthGuard] },
   {
     path: '**',
     redirectTo: 'dashboard'

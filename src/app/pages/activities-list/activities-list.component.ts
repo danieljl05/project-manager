@@ -23,6 +23,11 @@ export class ActivitiesListComponent implements OnInit {
     'Walk dog'
   ];
 
+  checked = [
+    'Get up',
+    'Walk dog'
+  ];
+
   constructor() { }
 
   ngOnInit() {
@@ -38,5 +43,4 @@ export class ActivitiesListComponent implements OnInit {
         event.currentIndex);
     }
   }
-
 }

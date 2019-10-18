@@ -1,0 +1,47 @@
+<div class="header bg-gradient-danger pb-5 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row justify-content-md-center">
+    <div class="col-10">
+      <div class="card mb-4">
+        <!-- Card header -->
+        <div class="card-header">
+          <h3 class="mb-0">Formulario</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+          <!-- Form groups used in grid -->
+          <form (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-control-label" for="idproject">Proyecto</label>
+                  <select name="idproject" id="idproject" class="form-control" [(ngModel)]="tag.idproject">
+                    <option *ngFor="let project of projectsList" value="{{project.idproject}}">{{project.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Nombre</label>
+                  <input type="text" class="form-control" id="name" placeholder="Nombre etiqueta" name="name"
+                    [(ngModel)]="tag.name" type="text" required>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="text-right">
+                  <a class="btn btn-danger mt-4" [routerLink]="['/tags']">Cancelar</a>
+                  <button type="button" type="submit" class="btn btn-primary mt-4">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

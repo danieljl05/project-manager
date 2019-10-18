@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectService {
 
   public url = 'http://localhost:8000/api/';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
 
-  }
+  // -------------------------------------------- Project --------------------------------------------
 
   getProjects() {
     return this.http.get(this.url + 'projects');
@@ -19,6 +19,12 @@ export class ProjectService {
     return this.http.get(this.url + 'project/' + idProject);
   }
 
+  deleteProject(projectId) {
+    return this.http.get(this.url + 'project-delete/' + projectId);
+  }
+
+  // -------------------------------------------- Users --------------------------------------------
+
   getUsers() {
     return this.http.get(this.url + 'users');
   }
@@ -27,15 +33,24 @@ export class ProjectService {
     return this.http.get(this.url + 'user/' + idUser);
   }
 
-  getRoles() {
-    return this.http.get(this.url + 'roles');
-  }
-
   deleteUser(userId) {
     return this.http.get(this.url + 'user-delete/' + userId);
   }
 
-  deleteProject(projectId) {
-    return this.http.get(this.url + 'project-delete/' + projectId);
+  // -------------------------------------------- Tags --------------------------------------------
+  getTags(tagId = null) {
+    if (tagId > 0) {
+      return this.http.get(this.url + 'tags/' + tagId);
+    }
+    return this.http.get(this.url + 'tags');
+  }
+
+  deleteTag(tagId) {
+    return this.http.get(this.url + 'tag-delete/' + tagId);
+  }
+
+  // ------------------------------------------ Utilities ------------------------------------------
+  getRoles() {
+    return this.http.get(this.url + 'roles');
   }
 }

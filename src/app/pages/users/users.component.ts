@@ -28,5 +28,4 @@ export class UsersComponent implements OnInit {
       this.usersList = data['users'];
     });
   }
-
 }

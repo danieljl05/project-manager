@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private token: TokenService
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   handleResponse(data) {
-    this.token.handle(data);
+    this.tokenService.handle(data);
     this.router.navigateByUrl('/dashboard');
   }
-
 }

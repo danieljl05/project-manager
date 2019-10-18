@@ -27,14 +27,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(private authService: AuthService) {
 
-   }
+  }
 
   ngOnInit() {
-    this.authService.verify().subscribe(data => {
-      if (data['idrol'] == 1) {
-        this.showUsers = true;
-      }
-    });
+    this.showUsers = this.authService.isAdmin();
     // this.datasets = [
     //   [0, 20, 10, 30, 15, 40, 20, 60, 60],
     //   [0, 20, 5, 25, 10, 30, 15, 40, 40]

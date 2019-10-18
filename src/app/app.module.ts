@@ -24,6 +24,8 @@ import { LoginGuard } from './login.guard';
 import { ActivitiesListComponent } from './pages/activities-list/activities-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 registerLocaleData(localeEs, 'es-CO', localeEsExtra);
 
 export function tokenGetter() {
@@ -47,13 +49,15 @@ export function tokenGetter() {
       }
     }),
     DragDropModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ActivitiesListComponent,    
+    ActivitiesListComponent,
   ],
   providers: [ProjectService, AuthGuard, LoginGuard],
   bootstrap: [AppComponent]

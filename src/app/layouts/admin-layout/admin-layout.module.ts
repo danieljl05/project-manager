@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersComponent } from 'src/app/pages/users/users.component';
 import { UserComponent } from 'src/app/pages/user/user.component';
 import { ProjectComponent } from 'src/app/pages/project/project.component';
+import { TagsComponent } from 'src/app/pages/tags/tags.component';
+import { TagComponent } from 'src/app/pages/tag/tag.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ProjectComponent } from 'src/app/pages/project/project.component';
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    ProjectComponent
+    ProjectComponent,
+    TagsComponent,
+    TagComponent
   ]
 })
 

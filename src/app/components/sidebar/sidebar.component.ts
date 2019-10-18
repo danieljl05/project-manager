@@ -9,11 +9,11 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-  // { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/dashboard', title: 'Inicio',  icon: 'ni-tv-2 text-primary', class: '' },
   // { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
   // { path: '/maps', title: '',  icon:'ni-folder-17 text-orange', class: '' },
   // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-  { path: '/projects', title: 'Proyectos', icon: 'ni-folder-17 text-orange', class: '' },
+  { path: '/projects', title: 'Proyectos', icon: 'fas fa-chart-bar text-danger', class: '' },
   // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
 ];
 
@@ -26,22 +26,20 @@ export class SidebarComponent implements OnInit {
 
   public menuItems: any[];
   public isCollapsed = true;
-
+  public pushed = false;
+  
   constructor(
     private router: Router,
     private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.authService.verify().subscribe(data => {
-      console.log(data);
-      if (data['idrol'] == 1) {
-        ROUTES.push(
-          { path: '/users', title: 'Usuarios', icon: 'ni-user-run text-info', class: '' },
-        );
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-      }
-    });
+    if (this.authService.isAdmin()) {
+      ROUTES.push(
+        { path: '/users', title: 'Usuarios', icon: 'fas fa-users text-warning', class: '' },
+        { path: '/tags', title: 'Etiquetas', icon: 'fas fa-tag text-yellow', class: '' },
+      );
+    }
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;

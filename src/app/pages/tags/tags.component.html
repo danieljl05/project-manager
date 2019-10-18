@@ -11,8 +11,8 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row">
-            <h3 class="" style="margin-bottom: 5px;">Listado proyectos</h3> &nbsp;&nbsp;
-            <a class="btn btn-info btn-sm" [routerLink]="['/project']"> Agregar</a>
+            <h3 class="" style="margin-bottom: 5px;">Listado etiquetas</h3> &nbsp;&nbsp;
+            <a class="btn btn-info btn-sm" [routerLink]="['/tag']"> Agregar</a>
           </div>
         </div>
         <div class="table-responsive">
@@ -20,22 +20,20 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Nombre</th>
-                <th scope="col">Fecha inicio</th>
+                <th scope="col">Proyecto</th>
                 <th scope="col">Opciones</th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let project of projectsList">
+              <ng-container *ngFor="let tag of tagsList">
                 <tr>
-                  <td> {{ project.name }} </td>
-                  <td> {{ project.startdate | date: 'mediumDate' }} </td>
+                  <td> {{ tag.name }} </td>
+                  <td> {{ tag.projectName }} </td>
                   <td>
-                    <a class="btn btn-dark btn-sm fas fa-tasks" title="Visualizar" target="_blank"
-                      [routerLink]="['/projects/', project.idproject, 'dashboard']"> </a>
                     <a class="btn btn-primary btn-sm fas fa-pencil-alt" title="Editar"
-                      [routerLink]="['/projects/', project.idproject, 'edit']"> </a>
+                      [routerLink]="['/tag/', tag.idtag, 'edit']"> </a>
                     <button class="btn btn-danger btn-sm far fa-trash-alt" title="Eliminar"
-                      (click)="delete(project.idproject)"></button>
+                      (click)="delete(tag.idTag)"></button>
                   </td>
                 </tr>
               </ng-container>

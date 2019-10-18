@@ -30,9 +30,9 @@
                   <td> {{ user.surname }} </td>
                   <td> {{ user.idnumber }} </td>
                   <td> {{ user.email }} </td>
-                  <td> <a class="btn btn-primary btn-sm ni ni-settings" title="Editar"
-                      [routerLink]="['/users', 'edit', user.iduser]"> </a>
-                    <button class="btn btn-danger btn-sm ni ni-basket" title="Eliminar"
+                  <td> <a class="btn btn-primary btn-sm fas fa-pencil-alt" title="Editar"
+                      [routerLink]="['/users/', user.iduser, 'edit']"> </a>
+                    <button class="btn btn-danger btn-sm far fa-trash-alt" title="Eliminar"
                       (click)="delete(user.iduser)"></button>
                   </td>
                 </tr>

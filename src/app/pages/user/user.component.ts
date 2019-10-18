@@ -23,10 +23,15 @@ export class UserComponent implements OnInit {
   ) {
     this.route.params.subscribe(params => {
       this.idUser = params['id'];
+      this.getUser();
     });
   }
 
   ngOnInit() {
+    this.getUser();
+  }
+
+  getUser() {
     this.projectService.getRoles().subscribe((data) => {
       this.rolList = data['roles'];
       this.projectService.getUser(this.idUser).subscribe((resp) => {
@@ -45,8 +50,6 @@ export class UserComponent implements OnInit {
   }
 
   handleData(data) {
-    console.log(data);
-    
     this.router.navigateByUrl('/users');
   }
 }

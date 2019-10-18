@@ -31,5 +31,4 @@ export class ProjectComponent implements OnInit {
       this.projectsList = data['projects'];
     });
   }
-
 }

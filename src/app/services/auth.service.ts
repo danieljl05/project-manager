@@ -10,14 +10,19 @@ export class AuthService {
   public url = 'http://localhost:8000/api/';
 
   constructor(
-    private http: HttpClient,
-    private tokenService: TokenService
+    private http: HttpClient
   ) { }
 
-  verify() {
-    // const tokenPayload = this.tokenService.getPayload();
-    // const userId = tokenPayload['sub'];
+  me() {
     return this.http.post(this.url + 'me', {});
   }
 
+  isAdmin() {
+    const userInfo = this.getUserInfo();
+    return userInfo['idrol'] == 1;
+  }
+
+  getUserInfo() {
+    return JSON.parse(localStorage.getItem('user-info'));
+  }
 }
