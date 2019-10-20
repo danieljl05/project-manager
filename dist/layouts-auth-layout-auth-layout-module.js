@@ -114,6 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_services_token_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/token.service */ "./src/app/services/token.service.ts");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -127,11 +128,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(http, router, tokenService) {
+    function LoginComponent(http, router, tokenService, authService) {
         this.http = http;
         this.router = router;
         this.tokenService = tokenService;
+        this.authService = authService;
         this.error = null;
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -140,7 +143,7 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.onSubmit = function (form) {
         var _this = this;
-        this.http.post('http://localhost:8000/api/login', form.value).subscribe(function (data) { return _this.handleResponse(data); }, function (error) { return _this.handleError(error); });
+        this.http.post(this.authService.getUrl() + 'login', form.value).subscribe(function (data) { return _this.handleResponse(data); }, function (error) { return _this.handleError(error); });
     };
     LoginComponent.prototype.handleError = function (error) {
         this.error = error.error.error;
@@ -157,7 +160,8 @@ var LoginComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            src_app_services_token_service__WEBPACK_IMPORTED_MODULE_3__["TokenService"]])
+            src_app_services_token_service__WEBPACK_IMPORTED_MODULE_3__["TokenService"],
+            src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -202,6 +206,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_services_token_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/token.service */ "./src/app/services/token.service.ts");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -215,11 +220,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(http, router, token) {
+    function RegisterComponent(http, router, token, authService) {
         this.http = http;
         this.router = router;
         this.token = token;
+        this.authService = authService;
         this.error = [];
     }
     RegisterComponent.prototype.ngOnInit = function () {
@@ -229,7 +236,7 @@ var RegisterComponent = /** @class */ (function () {
         var data = form.value;
         data.idrol = 2;
         data.avatar = "avatar";
-        this.http.post('http://localhost:8000/api/signin', data).subscribe(function (data) { return _this.handleResponse(data); }, function (error) { return _this.handleError(error); });
+        this.http.post(this.authService.getUrl() + 'signin', data).subscribe(function (data) { return _this.handleResponse(data); }, function (error) { return _this.handleError(error); });
     };
     RegisterComponent.prototype.handleError = function (error) {
         this.error = error.error.errors;
@@ -246,7 +253,8 @@ var RegisterComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            src_app_services_token_service__WEBPACK_IMPORTED_MODULE_3__["TokenService"]])
+            src_app_services_token_service__WEBPACK_IMPORTED_MODULE_3__["TokenService"],
+            src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());

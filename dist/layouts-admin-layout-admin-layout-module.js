@@ -976,7 +976,7 @@ var TablesComponent = /** @class */ (function () {
         if (this.form.idproject) {
             route = "/" + this.form.idproject;
         }
-        this.http.post('http://localhost:8000/api/project' + route, this.form).subscribe(function (data) { return _this.handleResponse(data); }, function (error) { return _this.handleError(error); });
+        this.http.post(this.projectService.getUrl() + 'project' + route, this.form).subscribe(function (data) { return _this.handleResponse(data); }, function (error) { return _this.handleError(error); });
     };
     TablesComponent.prototype.handleError = function (error) {
         console.log(error);
@@ -1086,7 +1086,7 @@ var TagComponent = /** @class */ (function () {
             this.tag['idproject'] = this.projectsList[0]['idproject'];
         }
         var data = this.tag;
-        this.http.post('http://localhost:8000/api/tag', data).subscribe(function (data) { return _this.handleData(data); }, function (error) { return console.log(error); });
+        this.http.post(this.projectService.getUrl() + 'tag', data).subscribe(function (data) { return _this.handleData(data); }, function (error) { return console.log(error); });
     };
     TagComponent.prototype.handleData = function (data) {
         this.router.navigateByUrl('/tags');
@@ -1342,7 +1342,7 @@ var UserComponent = /** @class */ (function () {
         var _this = this;
         var data = this.user;
         console.log(data);
-        this.http.post('http://localhost:8000/api/update', data).subscribe(function (data) { return _this.handleData(data); }, function (error) { return console.log(error); });
+        this.http.post(this.projectService.getUrl() + 'update', data).subscribe(function (data) { return _this.handleData(data); }, function (error) { return console.log(error); });
     };
     UserComponent.prototype.handleData = function (data) {
         this.router.navigateByUrl('/users');

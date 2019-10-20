@@ -28,6 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 registerLocaleData(localeEs, 'es-CO', localeEsExtra);
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -59,7 +61,7 @@ export function tokenGetter() {
     AuthLayoutComponent,
     ActivitiesListComponent,
   ],
-  providers: [ProjectService, AuthGuard, LoginGuard],
+  providers: [ProjectService, AuthGuard, LoginGuard, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -163,6 +163,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 Object(_angular_common__WEBPACK_IMPORTED_MODULE_12__["registerLocaleData"])(_angular_common_locales_es__WEBPACK_IMPORTED_MODULE_15___default.a, 'es-CO', _angular_common_locales_extra_es__WEBPACK_IMPORTED_MODULE_16___default.a);
+
 function tokenGetter() {
     return localStorage.getItem("token");
 }
@@ -182,7 +183,7 @@ var AppModule = /** @class */ (function () {
                 _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_13__["JwtModule"].forRoot({
                     config: {
                         tokenGetter: tokenGetter,
-                        whitelistedDomains: ["localhost:8000"],
+                        whitelistedDomains: ["localhost:8000", "project-manager-udi.000webhostapp.com"],
                         blacklistedRoutes: []
                     }
                 }),
@@ -197,7 +198,7 @@ var AppModule = /** @class */ (function () {
                 _layouts_auth_layout_auth_layout_component__WEBPACK_IMPORTED_MODULE_7__["AuthLayoutComponent"],
                 _pages_activities_list_activities_list_component__WEBPACK_IMPORTED_MODULE_18__["ActivitiesListComponent"],
             ],
-            providers: [_services_project_service__WEBPACK_IMPORTED_MODULE_11__["ProjectService"], _auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"], _login_guard__WEBPACK_IMPORTED_MODULE_17__["LoginGuard"]],
+            providers: [_services_project_service__WEBPACK_IMPORTED_MODULE_11__["ProjectService"], _auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"], _login_guard__WEBPACK_IMPORTED_MODULE_17__["LoginGuard"], { provide: _angular_common__WEBPACK_IMPORTED_MODULE_12__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_12__["HashLocationStrategy"] }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
@@ -964,8 +965,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AuthService = /** @class */ (function () {
     function AuthService(http) {
         this.http = http;
-        this.url = 'http://localhost:8000/api/';
+        // public url = 'http://localhost:8000/api/';
+        this.url = 'https://project-manager-back.herokuapp.com/api/';
     }
+    AuthService.prototype.getUrl = function () {
+        return this.url;
+    };
     AuthService.prototype.me = function () {
         return this.http.post(this.url + 'me', {});
     };
@@ -1015,8 +1020,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ProjectService = /** @class */ (function () {
     function ProjectService(http) {
         this.http = http;
-        this.url = 'http://localhost:8000/api/';
+        // public url = 'http://localhost:8000/api/';
+        this.url = 'https://project-manager-back.herokuapp.com/api/';
     }
+    ProjectService.prototype.getUrl = function () {
+        return this.url;
+    };
     // -------------------------------------------- Project --------------------------------------------
     ProjectService.prototype.getProjects = function () {
         return this.http.get(this.url + 'projects');
