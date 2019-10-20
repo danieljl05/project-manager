@@ -8,11 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
-  },
-  "engines": {
-    "node": "10.14.2",
-      "npm": "6.4.1"
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
@@ -61,5 +58,9 @@
     "protractor": "5.4.2",
     "ts-node": "8.0.2",
     "tslint": "5.12.1"
+  },
+  "engines": {
+    "node": "10.14.2",
+    "npm": "6.4.1"
   }
 }
