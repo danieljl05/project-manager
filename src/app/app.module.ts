@@ -44,7 +44,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["localhost:8000"],
+        whitelistedDomains: ["localhost:8000", "project-manager-udi.000webhostapp.com"],
         blacklistedRoutes: []
       }
     }),

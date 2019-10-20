@@ -7,11 +7,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  public url = 'http://localhost:8000/api/';
+  // public url = 'http://localhost:8000/api/';
+  public url = 'https://project-manager-udi.000webhostapp.com/';
+  public url = 'https://project-manager-udi.000webhostapp.com/api/';
 
   constructor(
     private http: HttpClient
   ) { }
+
+  getUrl() {
+    return this.url;
+  }
 
   me() {
     return this.http.post(this.url + 'me', {});

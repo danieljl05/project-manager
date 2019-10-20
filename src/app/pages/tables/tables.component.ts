@@ -51,7 +51,7 @@ export class TablesComponent implements OnInit {
     if (this.form.idproject) {
       route = "/" + this.form.idproject;
     }
-    this.http.post('http://localhost:8000/api/project' + route, this.form).subscribe(
+    this.http.post(this.projectService.getUrl() + 'project' + route, this.form).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     );

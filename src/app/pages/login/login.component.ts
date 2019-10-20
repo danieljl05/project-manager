@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    this.http.post('http://localhost:8000/api/login', form.value).subscribe(
+    this.http.post(this.authService.getUrl() + 'login', form.value).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     );

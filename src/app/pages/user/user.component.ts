@@ -43,7 +43,7 @@ export class UserComponent implements OnInit {
   onSubmit() {
     const data = this.user;
     console.log(data);
-    this.http.post('http://localhost:8000/api/update', data).subscribe(
+    this.http.post(this.projectService.getUrl() + 'update', data).subscribe(
       data => this.handleData(data),
       error => console.log(error)
     );

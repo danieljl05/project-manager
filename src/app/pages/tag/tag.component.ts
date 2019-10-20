@@ -46,7 +46,7 @@ export class TagComponent implements OnInit {
       this.tag['idproject'] = this.projectsList[0]['idproject'];
     }
     const data = this.tag;
-    this.http.post('http://localhost:8000/api/tag', data).subscribe(
+    this.http.post(this.projectService.getUrl() + 'tag', data).subscribe(
       data => this.handleData(data),
       error => console.log(error)
     );

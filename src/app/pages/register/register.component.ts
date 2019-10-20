@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private token: TokenService
+    private token: TokenService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
     let data = form.value;
     data.idrol = 2;
     data.avatar = "avatar";
-    this.http.post('http://localhost:8000/api/signin', data).subscribe(
+    this.http.post(this.authService.getUrl() + 'signin', data).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     );
