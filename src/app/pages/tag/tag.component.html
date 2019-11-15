@@ -17,7 +17,14 @@
           <!-- Form groups used in grid -->
           <form (ngSubmit)="onSubmit()">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Nombre</label>
+                  <input type="text" class="form-control" id="name" placeholder="Nombre etiqueta" name="name"
+                    [(ngModel)]="tag.name" type="text" required>
+                </div>
+              </div>
+              <div class="col-md-10">
                 <div class="form-group">
                   <label class="form-control-label" for="idproject">Proyecto</label>
                   <select name="idproject" id="idproject" class="form-control" [(ngModel)]="tag.idproject">
@@ -25,11 +32,13 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-2">
                 <div class="form-group">
-                  <label class="form-control-label" for="name">Nombre</label>
-                  <input type="text" class="form-control" id="name" placeholder="Nombre etiqueta" name="name"
-                    [(ngModel)]="tag.name" type="text" required>
+                  <label class="form-control-label" for="color">Color</label>
+                  <input class="form-control" [style.background]="tag.color" style="color: transparent;"
+                    [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
+                    [(colorPicker)]="tag.color" [cpPosition]="'bottom-left'" [cpOutputFormat]="'hex'"
+                    [(ngModel)]="tag.color" name="color" id="color"/>
                 </div>
               </div>
               <div class="col-12">

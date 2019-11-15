@@ -17,7 +17,10 @@ import { UserComponent } from 'src/app/pages/user/user.component';
 import { ProjectComponent } from 'src/app/pages/project/project.component';
 import { TagsComponent } from 'src/app/pages/tags/tags.component';
 import { TagComponent } from 'src/app/pages/tag/tag.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 // import { ToastrModule } from 'ngx-toastr';
+
+
 
 @NgModule({
   imports: [
@@ -26,7 +29,8 @@ import { TagComponent } from 'src/app/pages/tag/tag.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ColorPickerModule,
   ],
   declarations: [
     DashboardComponent,

@@ -31,12 +31,13 @@
     "core-js": "2.6.4",
     "express": "^4.17.1",
     "ngx-clipboard": "11.1.9",
+    "ngx-color-picker": "^8.2.0",
     "ngx-toastr": "9.1.2",
     "nouislider": "13.1.1",
     "path": "^0.12.7",
     "rxjs": "6.4.0",
-    "zone.js": "0.8.29",
-    "typescript": "3.2.4"
+    "typescript": "3.2.4",
+    "zone.js": "0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.1",

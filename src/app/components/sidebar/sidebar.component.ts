@@ -8,8 +8,8 @@ declare interface RouteInfo {
   icon: string;
   class: string;
 }
-export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Inicio',  icon: 'ni-tv-2 text-primary', class: '' },
+export var ROUTES: RouteInfo[] = [
+  { path: '/dashboard', title: 'Inicio', icon: 'ni-tv-2 text-primary', class: '' },
   // { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
   // { path: '/maps', title: '',  icon:'ni-folder-17 text-orange', class: '' },
   // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
@@ -27,7 +27,6 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
   public pushed = false;
-  
   constructor(
     private router: Router,
     private authService: AuthService
@@ -35,10 +34,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isAdmin()) {
-      ROUTES.push(
+      ROUTES = [
+        { path: '/dashboard', title: 'Inicio', icon: 'ni-tv-2 text-primary', class: '' },
+        { path: '/projects', title: 'Proyectos', icon: 'fas fa-chart-bar text-danger', class: '' },
         { path: '/users', title: 'Usuarios', icon: 'fas fa-users text-warning', class: '' },
         { path: '/tags', title: 'Etiquetas', icon: 'fas fa-tag text-yellow', class: '' },
-      );
+      ];      
     }
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {

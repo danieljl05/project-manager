@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProjectService {
 
-  // public url = 'http://localhost:8000/api/';
-  public url = 'https://project-manager-back.herokuapp.com/api/';
+  public url = 'http://localhost:8000/api/';
+  // public url = 'https://project-manager-back.herokuapp.com/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,22 @@ export class ProjectService {
 
   deleteProject(projectId) {
     return this.http.get(this.url + 'project-delete/' + projectId);
+  }
+
+  getprojectMembers(projectId) {
+    return this.http.get(this.url + 'project/' + projectId + '/members');
+  }
+
+  addProjectMember(projectId, personId) {
+    return this.http.get(this.url + 'project/' + projectId + '/member/' + personId + '/add');
+  }
+
+  quitPerson(projectId, personId) {
+    return this.http.get(this.url + 'project/' + projectId + '/member/' + personId + '/delete');
+  }
+
+  getProjectTags(projectId) {
+    return this.http.get(this.url + 'project/' + projectId + '/tags');
   }
 
   // -------------------------------------------- Users --------------------------------------------
