@@ -31,4 +31,9 @@ export class ProjectComponent implements OnInit {
       this.projectsList = data['projects'];
     });
   }
+
+  isAdmin() {
+    const uinfo = JSON.parse(localStorage.getItem('user-info'));
+    return uinfo['idrol'] == 1;
+  }
 }

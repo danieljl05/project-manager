@@ -35,7 +35,7 @@
               <div class="col-md-2">
                 <div class="form-group">
                   <label class="form-control-label" for="color">Color</label>
-                  <input class="form-control" [style.background]="tag.color" style="color: transparent;"
+                  <input readonly class="form-control" [style.background]="tag.color" style="color: transparent;"
                     [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
                     [(colorPicker)]="tag.color" [cpPosition]="'bottom-left'" [cpOutputFormat]="'hex'"
                     [(ngModel)]="tag.color" name="color" id="color"/>

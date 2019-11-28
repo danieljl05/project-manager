@@ -1,92 +1,106 @@
-<mat-sidenav-container class="main-container">
-  <mat-sidenav opened mode="side" position="end" style="width: 16.5%;">
-    <div class="container" style="padding-left: 22px; padding-right: 22px;" *ngIf="ready">
-      <div class="row">
-        <br>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <mat-card>
-            <h1 class="text-center"> {{projectSelected.name}} </h1>
-          </mat-card>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
+<div class="bg">
+  <mat-sidenav-container class="main-container">
+    <mat-sidenav opened mode="side" position="end" style="width: 17%;" class="siden">
+      <div class="container" style="padding-left: 20px; padding-right: 20px;" *ngIf="ready">
+        <div class="row" style="margin-bottom: 22px;">
           <br>
-          <mat-accordion multi="true">
-            <mat-expansion-panel [expanded]="hasMembers()">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Integrantes
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-list>
-                <mat-divider *ngIf="hasMembers()"></mat-divider>
-                <ng-container *ngFor="let person of memberList">
-                  <mat-list-item>
-                    <small>
-                      {{ person.name }} {{person.surname}} &nbsp; <span title="Desvincular" style="cursor: pointer;"
-                        (click)="quitPerson(person.iduser)"><i class="fas fa-user-minus"></i>
-                      </span>
-                    </small>
-                  </mat-list-item>
-                  <mat-divider></mat-divider>
-                </ng-container>
-              </mat-list>
-              <mat-action-row>
-                <span style="cursor: pointer;" class="text-primary" (click)="addPerson()"> Agregar </span>
-              </mat-action-row>
-            </mat-expansion-panel>
-            <mat-expansion-panel [expanded]="hasTags()">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Etiquetas
-                </mat-panel-title>
-                <mat-panel-description>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <div class="row" *ngFor="let tag of tagList" style="margin-bottom: 7px; cursor: pointer;"
-                (click)="filter(tag.id)" title="filtrar">
-                <div class="col-sm-2">
-                  <div class="square" [style.background]="tag.color"></div>
+        </div>
+        <div class="row" style="margin-bottom: 12px;">
+          <div class="col-sm-12">
+            <mat-card>
+              <h2 class="text-center"> {{projectSelected.name}} </h2>
+            </mat-card>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-accordion multi="true">
+              <mat-expansion-panel [expanded]="hasMembers()">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Integrantes
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                  <mat-divider *ngIf="hasMembers()"></mat-divider>
+                  <ng-container *ngFor="let person of memberList">
+                    <mat-list-item>
+                      <small>
+                        {{ person.name }} {{person.surname}} &nbsp; <span *ngIf="isAdmin()" title="Desvincular"
+                          style="cursor: pointer;" (click)="quitPerson(person.iduser)"><i class="fas fa-user-minus"></i>
+                        </span>
+                      </small>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                  </ng-container>
+                </mat-list>
+                <mat-action-row *ngIf="isAdmin()">
+                  <span style="cursor: pointer;" class="text-primary" (click)="addPerson()"> Agregar </span>
+                </mat-action-row>
+              </mat-expansion-panel>
+              <mat-expansion-panel [expanded]="hasTags()">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Etiquetas
+                  </mat-panel-title>
+                  <mat-panel-description>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row" *ngFor="let tag of tagList" style="margin-bottom: 7px; cursor: pointer;"
+                  (click)="filter(tag.idtag)" title="filtrar">
+                  <div class="col-sm-2">
+                    <div matListAvatar class="square" [style.background]="tag.color"></div>
+                  </div>
+                  <div class="col-sm-10">
+                    {{ tag.name }}
+                  </div>
                 </div>
-                <div class="col-sm-10">
-                  {{ tag.name }}
-                </div>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
+                <mat-action-row>
+                  <span style="cursor: pointer;" class="text-primary" (click)="resetFilterTags()"> Limpiar </span>
+                </mat-action-row>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav>
+    <div class="row ml-6 mr-3 mt-5">
+      <div class="example-container">
+        <mat-card class="activity-header">
+          <h2 class="text-center">Pendientes <span *ngIf="isAdmin()"> | </span><span *ngIf="ready && isAdmin()"
+              style="cursor: pointer;" (click)="manageActivity()">
+              <small> <u> <i class="fas fa-plus"></i>
+                  Agregar </u> </small>
+            </span>
+          </h2>
+        </mat-card>
+        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+          class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of todo" cdkDrag (click)="seeActivity(item.idactivity)">{{item.name}}</div>
+        </div>
+      </div>
+
+      <div class="example-container">
+        <mat-card class="activity-header">
+          <h2 class="text-center">Terminadas</h2>
+        </mat-card>
+        <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+          [cdkDropListConnectedTo]="[todoList, checkedList]" class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of done" cdkDrag (click)="seeActivity(item.idactivity)">
+            {{item.name}}
+          </div>
+        </div>
+      </div>
+
+      <div class="example-container">
+        <mat-card class="activity-header">
+          <h2 class="text-center">Aprobadas </h2>
+        </mat-card>
+        <div cdkDropList #checkedList="cdkDropList" [cdkDropListData]="checked" [cdkDropListConnectedTo]="[doneList]"
+          class="example-list" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="isAdmin">
+          <div class="example-box" *ngFor="let item of checked" cdkDrag (click)="seeActivity(item.idactivity)">{{item.name}}</div>
         </div>
       </div>
     </div>
-  </mat-sidenav>
-  <div class="row mx-5 mt-5">
-    <div class="example-container">
-      <h2 class="text-center">Pendientes | <span style="cursor: pointer;"> <small> <u> <i class="fas fa-plus"></i>
-              Agregar </u> </small>
-        </span>
-      </h2>
-      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo" cdkDrag (click)="openDialog(item)">{{item}}</div>
-      </div>
-    </div>
-
-    <div class="example-container">
-      <h2 class="text-center">Terminadas</h2>
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
-        [cdkDropListConnectedTo]="[todoList, checkedList]" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag (click)="openDialog(item)">{{item}}</div>
-      </div>
-    </div>
-
-    <div class="example-container">
-      <h2 class="text-center">Aprobadas </h2>
-      <div cdkDropList #checkedList="cdkDropList" [cdkDropListData]="checked" [cdkDropListConnectedTo]="[doneList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of checked" cdkDrag (click)="openDialog(item)">{{item}}</div>
-      </div>
-    </div>
-  </div>
-</mat-sidenav-container>
+  </mat-sidenav-container>
+</div>

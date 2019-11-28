@@ -40,6 +40,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ActivityFormComponent } from './pages/activities-list/activity-form/activity-form.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatBadgeModule } from '@angular/material/badge';
+
+
 
 
 export function tokenGetter() {
@@ -50,6 +55,7 @@ export function tokenGetter() {
   entryComponents: [
     ActivityComponent,
     AddPersonComponent,
+    ActivityFormComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -78,7 +84,9 @@ export function tokenGetter() {
     MatExpansionModule,
     MatDividerModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRadioModule,
+    MatBadgeModule
   ],
   declarations: [
     AppComponent,
@@ -87,6 +95,7 @@ export function tokenGetter() {
     ActivitiesListComponent,
     ActivityComponent,
     AddPersonComponent,
+    ActivityFormComponent,
   ],
   providers: [ProjectService,
     AuthGuard,

@@ -5,6 +5,8 @@ import { ActivityComponent } from './activity/activity.component';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { AddPersonComponent } from 'src/app/components/pages/activities-list/add-person/add-person.component';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
+import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
   selector: 'app-activities-list',
@@ -19,34 +21,41 @@ export class ActivitiesListComponent implements OnInit {
   memberList: any[];
   tagList: any;
 
+  todoOriginal: any[];
+  doneOriginal: any[];
+  checkedOriginal: any[];
+
+  tagsSearch: any;
+
   todo = [
-    'Adición y consulta de tags',
-    'Agregar actividades',
-    'Agregar comentarios',
-    'Validar permiso para tarea completada'
+    // 'Adición y consulta de tags',
+    // 'Agregar actividades',
+    // 'Agregar comentarios',
+    // 'Validar permiso para tarea completada'
   ];
 
   done = [
-    'CRUD usuarios',
+    // 'CRUD usuarios',
   ];
 
   checked = [
-    'Implementación JSON web token',
-    'CRUD proyectos',
-    'CRUD tags',
-    'Login',
-    'Registrar empleado',
-    'Permiso login',
-    'Vista principal',
-    'Vista empleado',
-    'Vista administrador',
+    // 'Implementación JSON web token',
+    // 'CRUD proyectos',
+    // 'CRUD tags',
+    // 'Login',
+    // 'Registrar empleado',
+    // 'Permiso login',
+    // 'Vista principal',
+    // 'Vista empleado',
+    // 'Vista administrador',
   ];
 
   constructor(
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private activityService: ActivityService
   ) {
     this.ready = false;
     this.route.params.subscribe(params => {
@@ -73,6 +82,7 @@ export class ActivitiesListComponent implements OnInit {
         this.tagList = data['list'];
       });
       this.initMembers();
+      this.getActivities();
     }
   }
 
@@ -100,7 +110,9 @@ export class ActivitiesListComponent implements OnInit {
           }
           this.initMembers();
           setTimeout(() => {
-            this._snackBar.open(msg);
+            this._snackBar.open(msg, '', {
+              duration: 3000
+            });
           }, 300);
         });
       }
@@ -115,26 +127,85 @@ export class ActivitiesListComponent implements OnInit {
       }
       this.initMembers();
       setTimeout(() => {
-        this._snackBar.open(msg);
+        this._snackBar.open(msg, '', {
+          duration: 3000
+        });
       }, 300);
     });
   }
 
-  openDialog(item: any) {
+  manageActivity() {
+    let dialogRef = this.dialog.open(ActivityFormComponent, {
+      data: {
+        idproject: this.idproject,
+        employeesList: this.memberList,
+        tagList: this.tagList
+      },
+      height: '95%',
+      width: '50%'
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getActivities();
+    });
+  }
+
+  getActivities() {
+    this.activityService.getActivitiesByProjectId(this.idproject).subscribe(response => {
+      console.log(response);
+      this.todoOriginal = [...response['todo']];
+      this.doneOriginal = [...response['done']];
+      this.checkedOriginal = [...response['checked']];
+      this.todo = [...response['todo']];
+      this.done = [...response['done']];
+      this.checked = [...response['checked']];
+      this.tagsSearch = [...response['tags']];
+    });
+  }
+
+  filter(tagid) {
+    let activities = {};
+    this.tagsSearch.forEach(t => {
+      if (t['idtag'] == tagid) {
+        activities[t['idactivity']] = t['idactivity'];
+      }
+    });
+    let idactivities = Object.values(activities);
+    this.todo = this.todoOriginal.filter(a => idactivities.includes(a.idactivity));
+    this.done = this.doneOriginal.filter(a => idactivities.includes(a.idactivity));
+    this.checked = this.checkedOriginal.filter(a => idactivities.includes(a.idactivity));
+  }
+
+  resetFilterTags() {
+    this.todo = this.todoOriginal;
+    this.done = this.doneOriginal;
+    this.checked = this.checkedOriginal;
+  }
+
+  seeActivity(item: any) {
     let dialogRef = this.dialog.open(ActivityComponent, {
       data: item
     });
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    console.log(event.container.data);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      let state = event.container.id.split('-')[3];
+      this.updateState(event.previousContainer.data[event.previousIndex]['idactivity'], Number(state));
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  updateState(idactivity, state) {
+    state++;
+    this.activityService.updateActivitySatate(idactivity, state).subscribe(da => {
+      this.getActivities();
+    });
   }
 
   hasMembers() {
@@ -145,7 +216,8 @@ export class ActivitiesListComponent implements OnInit {
     return (this.tagList && this.tagList.length > 0);
   }
 
-  filter(tagid) {
-    console.log(tagid);
+  isAdmin() {
+    const uinfo = JSON.parse(localStorage.getItem('user-info'));
+    return uinfo['idrol'] == 1;
   }
 }

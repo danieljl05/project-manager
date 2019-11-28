@@ -13,10 +13,19 @@ export class ActivityService {
   ) { }
 
   getActivitiesByProjectId(projectId) {
-    return this.http.get(this.url + 'projects/' + projectId + '/activities');
+    return this.http.get(this.url + 'project/' + projectId + '/activities');
+  }
+
+  updateActivitySatate(idactivity, state) {
+    return this.http.get(this.url + 'activity/' + idactivity + '/state/' + state);
   }
 
   getEmployees() {
     return this.http.get(this.url + 'employees');
+  }
+
+  saveActivity(params) {
+    console.log(params);
+    return this.http.post(this.url + 'activity', params);
   }
 } 

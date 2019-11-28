@@ -1,0 +1,96 @@
+<mat-card>
+  <h1>Formulario actividad</h1>
+</mat-card>
+<br>
+<form role="form" #signupForm=ngForm (ngSubmit)="save()">
+  <div class="row">
+    <div class="col-8">
+      <mat-accordion multi="true">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Información básica
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-control-label" for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" placeholder="Nombre actividad" name="name"
+                  [(ngModel)]="activity.name" type="text" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-control-label" for="description">Descripción</label>
+                <textarea type="text" class="form-control" id="description" placeholder="Descripción..."
+                  name="description" [(ngModel)]="activity.description" type="text" cols="30" rows="5">
+            </textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Fecha de inicio</label>
+                <input type="date" class="form-control" name="startdate" [(ngModel)]="activity.startdate" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Fecha Fin</label>
+                <input type="date" class="form-control" name="enddate" [(ngModel)]="activity.enddate">
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="hasTags()">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Etiquetas
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-selection-list #tags>
+            <mat-list-option *ngFor="let tag of tagList" [value]="tag.idtag">
+              <div matListAvatar class="square" [style.background]="tag.color"></div>
+              <span matLine>
+                {{ tag.name }}
+              </span>
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-4">
+      <mat-accordion multi="true">
+        <mat-expansion-panel [expanded]="hasPeople()">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Integrantes
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-divider *ngIf="hasPeople()"></mat-divider>
+            <ng-container *ngFor="let person of personList">
+              <mat-list-item>
+                <small>
+                  {{ person.name }} {{person.surname}} &nbsp; <span title="Desvincular" style="cursor: pointer;"
+                    (click)="quitPerson(person.iduser)"><i class="fas fa-user-minus"></i>
+                  </span>
+                </small>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </ng-container>
+          </mat-list>
+          <mat-action-row>
+            <span style="cursor: pointer;" class="text-primary" (click)="addPerson()"> Agregar </span>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <mat-action-row style="width: 100%;">
+      <button class="btn btn-primary" [disabled]="validActivity()">Guardar</button>
+    </mat-action-row>
+  </div>
+</form>

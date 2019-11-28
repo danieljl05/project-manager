@@ -32,6 +32,30 @@ h4 {
   bottom: 0;
   left: 0;
   right: 0;
+
+  background: url("https://image.freepik.com/free-photo/bokeh-lights-background_1048-11152.jpg") no-repeat center center
+    fixed;
+  // background: url("https://image.freepik.com/free-photo/red-fiber-optics-lights-abstract-background_23-2148241250.jpg") no-repeat center center
+  //   fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.siden {
+  background: url("https://image.freepik.com/free-photo/bokeh-lights-background_1048-11152.jpg") no-repeat center center
+    fixed;
+  // background: url("https://image.freepik.com/free-photo/red-fiber-optics-lights-abstract-background_23-2148241250.jpghttps://image.freepik.com/free-photo/red-fiber-optics-lights-abstract-background_23-2148241250.jpg") no-repeat center center
+  //   fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.activity-header {
+  margin-bottom: 10px;
 }
 
 .example-container {
@@ -91,13 +115,14 @@ h4 {
   background: white;
 }
 
-.square {
-  width: 25px;
-  height: 25px;
-  border-radius: 2px;
-}
-
 .mat-list-base .mat-list-item .mat-list-item-content {
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+
+.square {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
 }

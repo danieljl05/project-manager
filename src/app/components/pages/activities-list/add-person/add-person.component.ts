@@ -22,17 +22,27 @@ export class AddPersonComponent implements OnInit {
   ) {
     this.ready = false;
     this.excludedMembers = data['memberList'];
+    if (data['employeesList']) {
+      this.employeesList = data['employeesList'];
+    }
   }
 
   ngOnInit() {
-    this.activityService.getEmployees().subscribe(data => {
-      this.employeesList = data['list'].filter((member) => {
+    if (this.employeesList) {
+      this.employeesList = this.employeesList.filter((member) => {
         return !(this.excludedMembers.includes(member.iduser));
       });
-      // this.employeesList = data['list'];
       this.dataSource = new MatTableDataSource(this.employeesList);
       this.ready = true;
-    });
+    } else {
+      this.activityService.getEmployees().subscribe(data => {
+        this.employeesList = data['list'].filter((member) => {
+          return !(this.excludedMembers.includes(member.iduser));
+        });
+        this.dataSource = new MatTableDataSource(this.employeesList);
+        this.ready = true;
+      });
+    }
   }
 
   applyFilter(filterValue: string) {
