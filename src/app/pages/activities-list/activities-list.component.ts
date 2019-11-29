@@ -183,7 +183,11 @@ export class ActivitiesListComponent implements OnInit {
 
   seeActivity(item: any) {
     let dialogRef = this.dialog.open(ActivityComponent, {
-      data: item
+      data: item,
+      width: '50%'
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getActivities();
     });
   }
 

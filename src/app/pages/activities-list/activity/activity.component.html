@@ -1,10 +1,42 @@
-<form action="">
-
-<h1>
-    Actividad - {{ data.name }}
-</h1>
-<hr>
-<!-- Responsable: -->
-<br><br><br>
-
-</form>
+<div *ngIf="ready">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>
+                Actividad - {{ activity.name }}
+            </h1>
+            <hr>
+        </div>
+        <div class="col-sm-8">
+            <h3> Descripción </h3>
+            <mat-card>
+                <p> {{ activity.description }} </p>
+            </mat-card>
+            <br>
+            <h3>Etiquetas</h3>
+            <mat-card>
+                <div class="row" *ngFor="let tag of tags" style="margin-bottom: 7px; cursor: pointer;" title="filtrar">
+                    <div class="col-sm-2">
+                        <div matListAvatar class="square" [style.background]="tag.color"></div>
+                    </div>
+                    <div class="col-sm-10">
+                        {{ tag.name }}
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-sm-4">
+            <h3>Integrantes</h3>
+            <mat-list>
+                <ng-container *ngFor="let person of users">
+                    <mat-list-item>
+                        {{ person.name }} {{person.surname}}
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </ng-container>
+            </mat-list>
+        </div>
+        <mat-action-row>
+            <button class="btn btn-danger float-right" type="button" (click)="delete()" >Eliminar</button>
+        </mat-action-row>
+    </div>
+</div>

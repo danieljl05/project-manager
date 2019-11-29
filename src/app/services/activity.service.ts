@@ -12,6 +12,14 @@ export class ActivityService {
     private http: HttpClient
   ) { }
 
+  getActivity(idactivity) {
+    return this.http.get(this.url + 'activity/' + idactivity)
+  }
+
+  deleteActivity(idactivity) {
+    return this.http.get(this.url + 'activity/' + idactivity + '/delete')
+  }
+
   getActivitiesByProjectId(projectId) {
     return this.http.get(this.url + 'project/' + projectId + '/activities');
   }
