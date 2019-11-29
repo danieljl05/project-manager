@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProjectService {
 
-  public url = 'http://localhost:8000/api/';
-  // public url = 'https://project-manager-back.herokuapp.com/api/';
+  // public url = 'http://localhost:8000/api/';
+  public url = 'https://project-manager-back.herokuapp.com/api/';
 
   constructor(private http: HttpClient) { }
 
